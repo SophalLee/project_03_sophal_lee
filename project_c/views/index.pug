@@ -1,0 +1,25 @@
+extends layout 
+
+block content
+    h1 Schedules
+    each schedule in schedules
+        p 
+            | User ID: #{schedule.username} <br />
+            case schedule.day
+                when 1
+                    | Monday <br />
+                when 2
+                    | Tuesday <br />
+                when 3
+                    | Wednesday <br />
+                when 4
+                    | Thursday <br />
+                when 5
+                    | Friday <br />
+                when 6
+                    | Saturday <br />
+                when 7
+                    | Sunday <br />
+            | Start at: #{schedule.start_at} <br />
+            | End at: #{schedule.end_at} <br />
+    a(href="/new") Add schedule
