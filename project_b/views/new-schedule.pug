@@ -1,0 +1,30 @@
+extends layout 
+
+block content
+    h1 Add a new schedule
+
+    form(action="/schedules", method="post") 
+        label(for="user_id") User ID 
+        select(name="user_id" id="user_id") 
+            each user, index in users 
+                option(value=index) #{user.firstname} #{user.lastname}
+        | <br /><br />
+        label(for="day") Day 
+        select(name="day" id="day") 
+            option(value=1) Monday
+            option(value=2) Tuesday
+            option(value=3) Wednesday
+            option(value=4) Thursday
+            option(value=5) Friday
+            option(value=6) Saturday
+            option(value=7) Sunday
+        | <br /><br />
+        label(for="start_at") Start at 
+        input(type="text" name="start_at" id="start_at")
+        | <br /><br />
+        label(for="end_at") End at 
+        input(type="text" name="end_at" id="end_at")
+        | <br /><br />
+        input(type="submit" name="Done")
+
+    

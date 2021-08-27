@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+    h1 Schedules
+    each schedule in schedules
+        p 
+            | User ID: #{schedule.user_id} <br />
+            | Day: #{schedule.day} <br />
+            | Start at: #{schedule.start_at} <br />
+            | End at: #{schedule.end_at} <br />
+
+        
