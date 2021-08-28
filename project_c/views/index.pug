@@ -2,24 +2,32 @@ extends layout
 
 block content
     h1 Schedules
-    each schedule in schedules
-        p 
-            | User ID: #{schedule.username} <br />
-            case schedule.day
-                when 1
-                    | Monday <br />
-                when 2
-                    | Tuesday <br />
-                when 3
-                    | Wednesday <br />
-                when 4
-                    | Thursday <br />
-                when 5
-                    | Friday <br />
-                when 6
-                    | Saturday <br />
-                when 7
-                    | Sunday <br />
-            | Start at: #{schedule.start_at} <br />
-            | End at: #{schedule.end_at} <br />
-    a(href="/new") Add schedule
+    a(href="/new") Add schedule <br><br>
+    table 
+        tr 
+            th Username
+            th Day 
+            th Start at 
+            th End at
+        each schedule in schedules
+            tr 
+                td #{schedule.username}
+                td  
+                    case schedule.day
+                        when 1
+                            | Monday 
+                        when 2
+                            | Tuesday 
+                        when 3
+                            | Wednesday 
+                        when 4
+                            | Thursday 
+                        when 5
+                            | Friday 
+                        when 6
+                            | Saturday 
+                        when 7
+                            | Sunday
+                td #{schedule.start_at}
+                td #{schedule.end_at}
+            

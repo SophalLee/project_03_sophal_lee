@@ -2,6 +2,8 @@ extends layout
 
 block content
     h1 Add a new schedule
+    
+    a(href="/") View schedules <br /><br />
 
     form(action="/new", method="post") 
         label(for="username") Username 
@@ -25,6 +27,5 @@ block content
         | <br /><br />
         input(type="submit" name="Done")
     
-    a(href="/") View schedules
 
     

@@ -5,12 +5,15 @@ const app = express();
 const { create } = require('domain');
 const { Pool } = require('pg');
 require('dotenv').config();
+const publicDirectory = path.join(__dirname, './public');
 
 const PORT = process.env.PORT || 3000
 
 app.use(express.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.use(express.static(publicDirectory));
+
 
 app.listen(PORT, () => {
     if(process.env.PORT) {
@@ -39,7 +42,7 @@ const pool = new Pool({
 
 // Display schedule on home page
 app.get('/', (req, res) => {
-    const displaySchedule = `SELECT * FROM schedule`;
+    const displaySchedule = `SELECT username, day, to_char(start_at, 'HH:MI') AS start_at, to_char(end_at, 'HH:MI') AS end_at FROM schedules`;
 
     pool.query(displaySchedule, (err, results) => {
         if(err) { 
@@ -56,10 +59,10 @@ app.get('/new', (req, res) => {
     res.render('new-schedule');
 });
 
-//After posting the form, add the values into the schedule table
+//After posting the form, add the values into the schedules table
 app.post('/new', (req, res) => {
     const { username, day, start_at, end_at } = req.body;
-    const addSchedule = `INSERT INTO schedule (username, day, start_at, end_at) 
+    const addSchedule = `INSERT INTO schedules (username, day, start_at, end_at) 
                         VALUES('${username}', ${day}, '${start_at}', '${end_at}')`
 
     if(checkValidTime(req.body.start_at) && checkValidTime(req.body.end_at)) {
