@@ -2,9 +2,20 @@ extends layout
 
 block content
     h1 Users 
-    each user in users
-        p 
-            | First name: #{user.firstname} <br />
-            | Last name: #{user.lastname} <br />
-            | Email: #{user.email} <br />
-            | Password: #{user.password} 
+    table 
+        tr 
+            th User ID
+            th First name 
+            th Last name 
+            th Email
+            th Password
+        each user, index in users
+            tr  
+                td 
+                    a(href='users/' + index) #{index}
+                td #{user.firstname} 
+                td #{user.lastname} 
+                td #{user.email}
+                td #{user.password}
+
+    a(href="/users/new") Add a new user

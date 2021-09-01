@@ -2,8 +2,16 @@ extends layout
 
 block content
     h1 User info 
-    p  
-        | First name: #{user.firstname} <br /> 
-        | Last name: #{user.lastname} <br />
-        | Email: #{user.email} <br />
-        | Password: #{user.password}
+    dl 
+        dt User ID
+        dd #{user_id}
+        dt First name
+        dd #{user.firstname}
+        dt Last name
+        dd #{user.lastname}
+        dt Email 
+        dd #{user.email} 
+        dt Password
+        dd #{user.password}
+    
+    a(href='/users/'+ user_id +'/schedules') View schedule

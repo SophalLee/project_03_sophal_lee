@@ -2,11 +2,19 @@ extends layout
 
 block content
     h1 Schedules
-    each schedule in schedules
-        p 
-            | User ID: #{schedule.user_id} <br />
-            | Day: #{schedule.day} <br />
-            | Start at: #{schedule.start_at} <br />
-            | End at: #{schedule.end_at} <br />
+    table 
+        tr 
+            th User ID
+            th Day
+            th Start at
+            th End at    
+        each schedule in schedules
+            tr 
+                td  #{schedule.user_id} 
+                td #{schedule.day} 
+                td #{schedule.start_at} 
+                td #{schedule.end_at} 
+    
+    a(href="/schedules/new") Add a new schedule
 
         

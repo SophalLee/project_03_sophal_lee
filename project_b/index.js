@@ -5,10 +5,12 @@ const path =require('path');
 const app = express();
 const PORT = process.env.PORT || 3000
 
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.urlencoded({ extended: true }));
+
+const publicDirectory = path.join(__dirname, './public');
+app.use(express.static(publicDirectory));
 
 app.listen(PORT, () => {
     if(process.env.PORT) {
@@ -38,7 +40,7 @@ app.get('/users/new', (req, res) => {
 app.get('/users/:id', (req, res, next) => {
 
     if(req.params.id < users.length) {
-        res.render('user', {user: users[req.params.id]});
+        res.render('user', {user: users[req.params.id], user_id: req.params.id});
     }
     else {
         res.send('User not found');
