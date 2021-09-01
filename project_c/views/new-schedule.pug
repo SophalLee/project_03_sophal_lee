@@ -1,31 +1,29 @@
 extends layout 
 
-block content
-    h1 Add a new schedule
-    
-    a(href="/") View schedules <br /><br />
+block content 
+    div(class="container")
+        h1 Add a new schedule
 
-    form(action="/new", method="post") 
-        label(for="username") Username 
-        input(type="text" name="username" id="username")
-        | <br /><br />
-        label(for="day") Day 
-        select(name="day" id="day") 
-            option(value=1) Monday
-            option(value=2) Tuesday
-            option(value=3) Wednesday
-            option(value=4) Thursday
-            option(value=5) Friday
-            option(value=6) Saturday
-            option(value=7) Sunday
-        | <br /><br />
-        label(for="start_at") Start at 
-        input(type="text" name="start_at" id="start_at")
-        | <br /><br />
-        label(for="end_at") End at 
-        input(type="text" name="end_at" id="end_at")
-        | <br /><br />
-        input(type="submit" name="Done")
+        form(action="/new", method="post" id="new_schedule") 
+            label(for="username") Username 
+            input(type="text" name="username" id="username")
+            label(for="day") Day 
+            select(name="day" id="day") 
+                option(value=1) Monday
+                option(value=2) Tuesday
+                option(value=3) Wednesday
+                option(value=4) Thursday
+                option(value=5) Friday
+                option(value=6) Saturday
+                option(value=7) Sunday
+            label(for="start_at") Start at 
+            input(type="time" name="start_at" id="start_at")
+            label(for="end_at") End at 
+            input(type="time" name="end_at" id="end_at")
+            input(type="submit" name="Done" id="button")
+        
+        a(href="/") View schedules 
+
     
 
     

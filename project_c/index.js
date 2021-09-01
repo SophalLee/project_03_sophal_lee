@@ -5,14 +5,16 @@ const app = express();
 const { create } = require('domain');
 const { Pool } = require('pg');
 require('dotenv').config();
-const publicDirectory = path.join(__dirname, './public');
 
+const publicDirectory = path.join(__dirname, './public');
 const PORT = process.env.PORT || 3000
+const validTime = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
 
 app.use(express.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(publicDirectory));
+
 
 
 app.listen(PORT, () => {
@@ -26,10 +28,8 @@ app.listen(PORT, () => {
 });
 
 //Function to check the time entered is valid
-function checkValidTime(time) {
-    var regEx = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-
-    return regEx.test(time);
+function validateInput(regex, input) {
+    return regex.test(input);
 }
 
 const pool = new Pool({
@@ -42,7 +42,7 @@ const pool = new Pool({
 
 // Display schedule on home page
 app.get('/', (req, res) => {
-    const displaySchedule = `SELECT username, day, to_char(start_at, 'HH:MI') AS start_at, to_char(end_at, 'HH:MI') AS end_at FROM schedules`;
+    const displaySchedule = `SELECT username, day, to_char(start_at, 'HH:MI AM') AS start_at, to_char(end_at, 'HH:MI AM') AS end_at FROM schedules`;
 
     pool.query(displaySchedule, (err, results) => {
         if(err) { 
@@ -65,7 +65,7 @@ app.post('/new', (req, res) => {
     const addSchedule = `INSERT INTO schedules (username, day, start_at, end_at) 
                         VALUES('${username}', ${day}, '${start_at}', '${end_at}')`
 
-    if(checkValidTime(req.body.start_at) && checkValidTime(req.body.end_at)) {
+    if(validateInput(validTime, req.body.start_at) && validateInput(validTime, req.body.end_at)) {
         pool.query(addSchedule, (err) => {
             if(err) throw err;
         })

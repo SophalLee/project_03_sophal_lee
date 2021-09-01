@@ -1,33 +1,36 @@
 extends layout 
 
 block content
-    h1 Schedules
-    a(href="/new") Add schedule <br><br>
-    table 
-        tr 
-            th Username
-            th Day 
-            th Start at 
-            th End at
-        each schedule in schedules
+    div(class="container")
+        h1 Schedules
+        table 
             tr 
-                td #{schedule.username}
-                td  
-                    case schedule.day
-                        when 1
-                            | Monday 
-                        when 2
-                            | Tuesday 
-                        when 3
-                            | Wednesday 
-                        when 4
-                            | Thursday 
-                        when 5
-                            | Friday 
-                        when 6
-                            | Saturday 
-                        when 7
-                            | Sunday
-                td #{schedule.start_at}
-                td #{schedule.end_at}
-            
+                th Username
+                th Day 
+                th Start at 
+                th End at
+            each schedule in schedules
+                tr 
+                    td #{schedule.username}
+                    td  
+                        case schedule.day
+                            when 1
+                                | Monday 
+                            when 2
+                                | Tuesday 
+                            when 3
+                                | Wednesday 
+                            when 4
+                                | Thursday 
+                            when 5
+                                | Friday 
+                            when 6
+                                | Saturday 
+                            when 7
+                                | Sunday
+                    td #{schedule.start_at}
+                    td #{schedule.end_at}
+
+        a(href="/new") Add schedule 
+
+                
